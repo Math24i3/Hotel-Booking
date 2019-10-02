@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+
+    <link rel="stylesheet" type="text/css" href="../stylesheet.css">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+<body>
+
+<div class="bg-image">
+
+    <div id="header" class="header">
+        <h1>Hotel Booking</h1>
+    </div>
+
+    <form action="/updateBooking/" method="POST">
+        <div class="menu">
+            <div class="button-group" id="myTopnav">
+                <a th:href="@{'/'}">Forside</a>
+                <a th:href="@{'/booking'}">Opret Booking</a>
+                <a th:href="@{'/deleteBooking'}">Slet Booking</a>
+                <a th:href="@{'/employees'}">Personale</a>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+            <div class="input-menu">
+
+                <div class="personeldata-column">
+                    <input type="hidden" name="booking_id" th:value="${booking.booking_id}"/>
+                    <p>Fornavn</p>
+                    <p>Efternavn</p>
+                    <input type="text" name="first_name" th:value="${booking.first_name}" required>
+                    <input type="text" name="last_name" th:value="${booking.last_name}" required>
+                    <p>Tlf nummer</p>
+                    <p>Email</p>
+                    <input type="number" name="phonenumber" th:value="${booking.phonenumber}" required>
+                    <input type="email" name="email" th:value="${booking.email}" required>
+                    <p>Vej</p>
+                    <p>Vejnummer</p>
+                    <input type="text" name="street_name" th:value="${booking.street_name}" required>
+                    <input type="number" name="street_number" th:value="${booking.street_number}" required>
+                    <p>By</p>
+                    <p>Zip</p>
+                    <input type="text" name="city" th:value="${booking.city}" required>
+                    <input type="number" name="zip" th:value="${booking.zip}" required>
+                </div>
+
+                <div class="bookinginfo-column">
+
+                    <p style="width: 200px">Vælg evt. et andet værelse</p>
+                    <p></p>
+
+                    <div class="drpdwn-field" th:object="${room}">
+                        <select class="form-control" id="room_number" name="room_number">
+                            <option th:text="'Værelse: ' +${booking.room_number}+'/ Type: '+${booking.room_type}+ '/ Pris: '+${booking.price}"
+                                    style="background-color: yellow"
+                                    th:value="${booking.room_number}"></option>
+                            <option th:each="room : ${rooms}"
+                                    th:value="${room.room_number}"
+                                    th:text="'Værelse' +${room.room_number}+'/ Type: '+${room.room_type}+ '/ Pris: '+${room.price}">
+
+                            </option>
+                        </select>
+                    </div>
+
+
+                </div>
+
+                <button class="button-submit" type="submit" id="create" value="Opdater">Opdater</button>
+            </div>
+        </div>
+    </form>
+
+
+</div>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "button-group") {
+            x.className += " responsive";
+        } else {
+            x.className = "button-group";
+        }
+    }
+</script>
+
+<script>
+    // When the user scrolls down 50px from the top of the document, resize the header's font size
+    window.onscroll = function () {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+            document.getElementById("header").style.fontSize = "18px";
+            document.getElementById("header").style.height = "50px";
+        } else {
+            document.getElementById("header").style.fontSize = "30px";
+            document.getElementById("header").style.height = "100px";
+
+        }
+    }
+</script>
+
+
+</body>
+</html>

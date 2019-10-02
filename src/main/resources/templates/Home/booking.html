@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking page</title>
+
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+
+<div class="bg-image">
+
+    <div id="header" class="header">
+        <h1>Hotel Booking</h1>
+    </div>
+
+
+    <form action="/addGuest/" method="POST">
+        <div class="menu">
+            <div class="button-group" id="myTopnav">
+                <a th:href="@{'/'}">Forside</a>
+                <a class="active" th:href="@{'/booking'}">Opret Booking</a>
+                <a th:href="@{'/deleteBooking'}">Slet Booking</a>
+                <a th:href="@{'/employees'}">Personale</a>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+            <div class="input-menu">
+
+                <div class="personeldata-column">
+                    <p>Fornavn</p>
+                    <p>Efternavn</p>
+                    <input type="text" id="first_name" name="first_name" placeholder="indtast fornavn..." required>
+                    <input type="text" id="last_name" name="last_name" placeholder="indtast efternavn..." required>
+                    <p>Tlf nummer</p>
+                    <p>Email</p>
+                    <input type="number" id="phonenumber" name="phonenumber" placeholder="indtast tlf-nummer..."
+                           required>
+                    <input type="email" id="email" name="email" placeholder="indtast email..." required>
+                    <p>Vej</p>
+                    <p>Vejnummer</p>
+                    <input type="text" id="street_name" name="street_name" placeholder="indtast vejnavn..." required>
+                    <input type="number" id="street_number" name="street_number" placeholder="indtast husnummer..."
+                           required>
+                    <p>By</p>
+                    <p>Zip</p>
+                    <input type="text" id="city" name="city" placeholder="indtast by..." required>
+                    <input type="number" id="zip" name="zip" placeholder="indtast postnummer..." max="9999" required>
+                </div>
+
+                <div class="bookinginfo-column">
+
+                    <p style="width: 300px; text-align: center">Vælg et ønsket værelse:</p>
+                    <div class="drpdwn-field" th:object="${room}">
+                        <select class="form-control" id="room_number" name="room_number">
+                            <option disabled>Vælg Ledigt Rum</option>
+                            <option th:each="room : ${rooms}"
+                                    th:value="${room.room_number}"
+                                    th:text="'Værelse: ' +${room.room_number}+'/ Type: '+${room.room_type}+ '/ Pris: '+${room.price}">
+
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <button class="button-submit" type="submit" id="create" value="Opret Booking">Opret Booking</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "button-group") {
+            x.className += " responsive";
+        } else {
+            x.className = "button-group";
+        }
+    }
+</script>
+
+<script>
+    // When the user scrolls down 50px from the top of the document, resize the header's font size
+    window.onscroll = function () {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+            document.getElementById("header").style.fontSize = "18px";
+            document.getElementById("header").style.height = "50px";
+        } else {
+            document.getElementById("header").style.fontSize = "30px";
+            document.getElementById("header").style.height = "100px";
+        }
+    }
+</script>
+</body>
+</html>

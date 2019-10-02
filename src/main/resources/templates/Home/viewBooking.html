@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>View Booking</title>
+
+    <link rel="stylesheet" type="text/css" href="../stylesheet.css">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+<body>
+
+<div class="bg-image">
+
+    <div id="header" class="header">
+        <h1>Hotel Booking</h1>
+    </div>
+
+
+    <div class="menu">
+        <div class="button-group" id="myTopnav">
+            <a th:href="@{'/'}">Forside</a>
+            <a th:href="@{'/booking'}">Opret Booking</a>
+            <a th:href="@{'/deleteBooking'}">Slet Booking</a>
+            <a th:href="@{'/employees'}">Personale</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        <div class="input-menu">
+
+            <div class="personeldata-column">
+                <p>Fornavn</p>
+                <p>Efternavn</p>
+                <input type="text" name="first_name" th:value="${booking.first_name}" disabled>
+                <input type="text" name="last_name" th:value="${booking.last_name}" disabled>
+                <p>Tlf nummer</p>
+                <p>Email</p>
+                <input type="number" name="phonenumber" th:value="${booking.phonenumber}" disabled>
+                <input type="email" name="email" th:value="${booking.email}" disabled>
+                <p>Vej</p>
+                <p>Vejnummer</p>
+                <input type="text" name="street_name" th:value="${booking.street_name}" disabled>
+                <input type="number" name="street_number" th:value="${booking.street_number}" disabled>
+                <p>By</p>
+                <p>Zip</p>
+                <input type="text" name="city" th:value="${booking.city}" disabled>
+                <input type="number" name="zip" th:value="${booking.zip}" disabled>
+            </div>
+
+            <div class="bookinginfo-column">
+                <p>Booking ID</p>
+                <p>Værelse</p>
+                <input type="text" name="booking_id" th:value="${booking.booking_id}" disabled>
+                <input type="text" name="room_number" th:value="${booking.room_number}" disabled>
+                <p>Type</p>
+                <p>Pris</p>
+                <input type="text" name="room_type" th:value="${booking.room_type}" disabled>
+                <input type="text" name="price" th:value="${booking.price}+' kr.'" disabled>
+
+
+            </div>
+
+            <a th:href="@{'/delete/'+${booking.booking_id}}"/>
+            <button class="button-submit" type="submit" value="Opret Booking">Slet booking</button>
+
+
+            <a th:href="@{'/updateBooking/'+${booking.booking_id}}"/>
+            <button class="button-submit" type="submit" value="Opret Booking">Opdater booking</button>
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "button-group") {
+            x.className += " responsive";
+        } else {
+            x.className = "button-group";
+        }
+    }
+</script>
+
+<script>
+    // When the user scrolls down 50px from the top of the document, resize the header's font size
+    window.onscroll = function () {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+            document.getElementById("header").style.fontSize = "18px";
+            document.getElementById("header").style.height = "50px";
+        } else {
+            document.getElementById("header").style.fontSize = "30px";
+            document.getElementById("header").style.height = "100px";
+        }
+    }
+</script>
+</body>
+</html>
