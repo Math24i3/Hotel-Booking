@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 
 import java.util.List;
 
+//Controller class
 @Controller
 public class HomeController {
 
